@@ -213,7 +213,7 @@ function initialize(projectContent = null) {
                 guiSeparatorAdded = false;
                 userGui = false;
                 messageHandlers["addButton"]({ name: "", label: "功能", callback: () => { monacoEditor.evaluateCode(true) } });
-                //messageHandlers["addSlider"]({ name: "MeshRes", default: 0.1, min: 0.01, max: 2, step: 0.01, dp: 2 });
+                messageHandlers["addSlider"]({ name: "啮合器", default: 0.1, min: 0.01, max: 2, step: 0.01, dp: 2 });
                 messageHandlers["addCheckbox"]({ name: "缓存?", default: true });
                 messageHandlers["addCheckbox"]({ name: "地平面?", default: true });
                 messageHandlers["addCheckbox"]({ name: "网格?", default: true });
