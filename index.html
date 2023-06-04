@@ -3,9 +3,9 @@
     <head>
         <title>Cascade Studio</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-        <meta name="application-name"   content="Cascade Studio">
-        <meta name="description"        content="A Full Live-Scripted CAD Kernel in the Browser">
-        <meta name="keywords"           content="SCAD, OpenSCAD, CAD, OpenCascade, Scripting">
+        <meta name="application-name"   content="AI3D">
+        <meta name="description"        content="AI3D">
+        <meta name="keywords"           content="AI3D">
         <meta name="author"             content="Johnathon Selstad">
         <meta name="viewport"           content="width=device-width, initial-scale=1.0">
         <meta name="theme-color"        content="#1e1e1e">
@@ -66,16 +66,16 @@
     <body onload="initialize();" style="margin:0px; background-color:rgb(34, 34, 34); "><!--overflow:hidden; position:fixed;-->
         <h1 hidden></h1> <!-- Puts the Lighthouse Score over 90 heheh-->
         <div id="topnav" class="topnav">
-            <a href="https://github.com/zalo/CascadeStudio">Cascade Studio 0.0.7</a>
-            <a href="#" title="Save Project to .json" onmouseup="saveProject();">Save Project</a>
-            <a href="#" title="Load Project from .json" onmouseup="loadProject();">Load Project</a>
-            <a href="#" onmouseup="threejsViewport.saveShapeSTEP();">Save STEP</a>
-            <a href="#" onmouseup="threejsViewport.saveShapeSTL();">Save STL</a>
-            <a href="#" onmouseup="threejsViewport.saveShapeOBJ();">Save OBJ</a>
-            <label for="files" title="Import STEP, IGES, or (ASCII) STL from File">Import STEP/IGES/STL
+            <a href="ai3d.fcup.cn">AI3D</a>
+            <a href="#" title="保存工程 .json" onmouseup="saveProject();">保存工程</a>
+            <a href="#" title="打开工程 .json" onmouseup="loadProject();">打开工程</a>
+            <a href="#" onmouseup="threejsViewport.saveShapeSTEP();">保存 STEP</a>
+            <a href="#" onmouseup="threejsViewport.saveShapeSTL();">保存 STL</a>
+            <a href="#" onmouseup="threejsViewport.saveShapeOBJ();">保存 OBJ</a>
+            <label for="files" title="导入 STEP, IGES, or (ASCII) STL 文件">导入 STEP/IGES/STL
                 <input id="files" name="files" type="file" accept=".iges,.step,.igs,.stp,.stl" multiple style="display:none;" oninput="loadFiles();"/>
             </label>
-            <a href="#" title="Clears the external step/iges/stl files stored in the project." onmouseup="clearExternalFiles();">Clear Imported Files</a>
+            <a href="#" title="清除项目中存储的外部 step/iges/stl 文件" onmouseup="clearExternalFiles();">清空</a>
         </div>
         <div id="appbody" style="height:auto">
             <link data-name="vs/editor/editor.main" rel="stylesheet" href="./node_modules/monaco-editor/min/vs/editor/editor.main.css">
