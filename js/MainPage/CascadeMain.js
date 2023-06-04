@@ -10,7 +10,7 @@ var myLayout, monacoEditor, threejsViewport,
 window.workerWorking = false;
 
 let starterCode = 
-`// Welcome to Cascade Studio!   Here are some useful functions:
+`// 欢迎来到AI3D！ 以下是一些有用的功能：
 //  Translate(), Rotate(), Scale(), Mirror(), Union(), Difference(), Intersection()
 //  Box(), Sphere(), Cylinder(), Cone(), Text3D(), Polygon()
 //  Offset(), Extrude(), RotatedExtrude(), Revolve(), Pipe(), Loft(), 
@@ -26,9 +26,7 @@ let cylinderX  = Rotate([1,0,0], 90, Cylinder(holeRadius, 200, true));
 
 Translate([0, 0, 50], Difference(sphere, [cylinderX, cylinderY, cylinderZ]));
 
-Translate([-25, 0, 40], Text3D("Hi!", 36, 0.15, 'Consolas'));
-
-// Don't forget to push imported or oc-defined shapes into sceneShapes to add them to the workspace!`;
+Translate([-25, 0, 40], Text3D("Hi!", 36, 0.15, 'Consolas'));`;
 
 function initialize(projectContent = null) {
     this.searchParams = new URLSearchParams(window.location.search || window.location.hash.substr(1))
@@ -73,13 +71,13 @@ function initialize(projectContent = null) {
                     content: [{
                         type: 'component',
                         componentName: 'cascadeView',
-                        title: 'CAD View',
+                        title: 'AI3D View',
                         componentState: GUIState,
                         isClosable: false
                     }, {
                         type: 'component',
                         componentName: 'console',
-                        title: 'Console',
+                        title: '控制台',
                         componentState: {},
                         height: 20.0,
                         isClosable: false
@@ -264,7 +262,7 @@ function initialize(projectContent = null) {
                 }
 
                 // Print a friendly message (to which we'll append progress updates)
-                console.log("Generating Model");
+                console.log("生成模型");
             };
 
             document.onkeydown = function (e) {
@@ -389,12 +387,12 @@ function initialize(projectContent = null) {
             messageHandlers["Progress"] = (payload) => {
                 // Add a dot to the progress indicator for each progress message we find in the queue
                 consoleContainer.parentElement.lastElementChild.lastElementChild.innerText =
-                    "> Generating Model" + ".".repeat(payload.opNumber) + ((payload.opType)? " ("+payload.opType+")" : "");
+                    "> 生成模型" + ".".repeat(payload.opNumber) + ((payload.opType)? " ("+payload.opType+")" : "");
             };
 
             // Print friendly welcoming messages
-            console.log("Welcome to Cascade Studio!");
-            console.log("Loading CAD Kernel...");
+            console.log("欢迎来到AI3D!");
+            console.log("加载 CAD Kernel...");
         }
     });
 

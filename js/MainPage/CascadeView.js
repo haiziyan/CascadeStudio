@@ -257,7 +257,7 @@ var CascadeEnvironment = function (goldenContainer) {
     
     this.environment.scene.add(this.mainObject);
     this.environment.viewDirty = true;
-    console.log("Generation Complete!");
+    console.log("生成完成！");
   }
 
   /** Save the current shape to .stl */
