@@ -26,7 +26,7 @@ let cylinderX  = Rotate([1,0,0], 90, Cylinder(holeRadius, 200, true));
 
 Translate([0, 0, 50], Difference(sphere, [cylinderX, cylinderY, cylinderZ]));
 
-Translate([-25, 0, 40], Text3D("AI3D!", 36, 0.15, 'Consolas'));`;
+Translate([-25, 0, 40], Text3D("AI3D", 36, 0.15, 'Consolas'));`;
 
 function initialize(projectContent = null) {
     this.searchParams = new URLSearchParams(window.location.search || window.location.hash.substr(1))
@@ -207,16 +207,16 @@ function initialize(projectContent = null) {
                 }
 
                 gui = new Tweakpane.Pane({
-                    title: 'Cascade Control Panel',
+                    title: '控制面板',
                     container: document.getElementById('guiPanel')
                 });
                 guiSeparatorAdded = false;
                 userGui = false;
-                messageHandlers["addButton"]({ name: "Evaluate", label: "Function", callback: () => { monacoEditor.evaluateCode(true) } });
-                messageHandlers["addSlider"]({ name: "MeshRes", default: 0.1, min: 0.01, max: 2, step: 0.01, dp: 2 });
-                messageHandlers["addCheckbox"]({ name: "Cache?", default: true });
-                messageHandlers["addCheckbox"]({ name: "GroundPlane?", default: true });
-                messageHandlers["addCheckbox"]({ name: "Grid?", default: true });
+                messageHandlers["addButton"]({ name: "", label: "功能", callback: () => { monacoEditor.evaluateCode(true) } });
+                //messageHandlers["addSlider"]({ name: "MeshRes", default: 0.1, min: 0.01, max: 2, step: 0.01, dp: 2 });
+                messageHandlers["addCheckbox"]({ name: "缓存?", default: true });
+                messageHandlers["addCheckbox"]({ name: "地平面?", default: true });
+                messageHandlers["addCheckbox"]({ name: "网格?", default: true });
                 userGui = true;
                 // Remove any existing Transform Handles that could be laying around
                 threejsViewport.clearTransformHandles();
@@ -255,7 +255,7 @@ function initialize(projectContent = null) {
                 // Determine whether to save the code + gui (no external files) 
                 // to the URL depending on the current mode of the editor.
                 if (saveToURL) {
-                    console.log("Saved to URL!"); //Generation Complete! 
+                    console.log("保存到网址！"); //Generation Complete! 
                     window.history.replaceState({}, 'Cascade Studio',
                       new URL(location.pathname + "#code=" + encode(newCode) + "&gui=" + encode(JSON.stringify(GUIState)), location.href).href
                     );
