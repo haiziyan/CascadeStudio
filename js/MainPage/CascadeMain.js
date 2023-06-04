@@ -26,7 +26,7 @@ let cylinderX  = Rotate([1,0,0], 90, Cylinder(holeRadius, 200, true));
 
 Translate([0, 0, 50], Difference(sphere, [cylinderX, cylinderY, cylinderZ]));
 
-Translate([-25, 0, 40], Text3D("Hi!", 36, 0.15, 'Consolas'));`;
+Translate([-25, 0, 40], Text3D("AI3D!", 36, 0.15, 'Consolas'));`;
 
 function initialize(projectContent = null) {
     this.searchParams = new URLSearchParams(window.location.search || window.location.hash.substr(1))
