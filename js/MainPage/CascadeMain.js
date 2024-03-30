@@ -10,23 +10,73 @@ var myLayout, monacoEditor, threejsViewport,
 window.workerWorking = false;
 
 let starterCode = 
-`// 欢迎来到AI3D！ 以下是一些有用的功能：
-//  Translate(), Rotate(), Scale(), Mirror(), Union(), Difference(), Intersection()
-//  Box(), Sphere(), Cylinder(), Cone(), Text3D(), Polygon()
-//  Offset(), Extrude(), RotatedExtrude(), Revolve(), Pipe(), Loft(), 
-//  FilletEdges(), ChamferEdges(),
-//  Slider(), Checkbox(), TextInput(), Dropdown()
+`//此代码由AI生成
+// 定义小米汽车设计变量 
+let 车身长度       = 60;
+let 车身宽度       = 30;
+let 前悬长          = 10;
+let 后悬长          = 10;
+let 车厢宽度       = 25;
+let 车厢长度       = 40;
+let 车身高度       = 15;
+let 发动机舱高度 = 8;
+let 发动机舱圆角 = 5;
+let 发动机舱长度 = 20;
+let 轮胎半径       = 7;
+let 轮胎宽度       = 5;
+let 轮胎凸出量   = 1;
+let 轮辋高度       = 1;
+let 轮胎压缩       = 2;
+let 路面离地间隙 = 3;
 
-let holeRadius = Slider("Radius", 30 , 20 , 40);
+// 根据设计变量计算衍生属性
+let 轴距           = 车身长度 - 前悬长 - 后悬长;
+let 车厢收窄       = (车身宽度 - 车厢宽度)/2;
+let 车厢底           = 路面离地间隙 + 发动机舱高度
+let 车厢高度       = 车身高度-发动机舱高度
 
-let sphere     = Sphere(50);
-let cylinderZ  =                     Cylinder(holeRadius, 200, true);
-let cylinderY  = Rotate([0,1,0], 90, Cylinder(holeRadius, 200, true));
-let cylinderX  = Rotate([1,0,0], 90, Cylinder(holeRadius, 200, true));
+// 绘制小米汽车车身和乘客舱
+let 车身          = Translate([0,0,路面离地间隙],Box(车身长度,车身宽度,发动机舱高度))
+let 车厢         = Translate([发动机舱长度,车厢收窄,车厢底-0.5],
+                            Box(车厢长度, 车厢宽度, 车厢高度))
 
-Translate([0, 0, 50], Difference(sphere, [cylinderX, cylinderY, cylinderZ]));
+// 调整车身的空气动力学形状
+let 圆角车身   = FilletEdges(车身,发动机舱圆角,[1,5])
+let 空气动力学车厢   = ChamferEdges(车厢, 车厢高度-0.5 , [1,5])
 
-Translate([-25, 0, 40], Text3D("AI3D", 36, 0.15, 'Consolas'));`;
+// 圆角所有边缘
+let 车厢圆角       = Offset(空气动力学车厢,1.5);
+let 车身收缩    = Offset(圆角车身,-1);
+let 车身圆角    = Offset(车身收缩,2);
+
+// 定义轮胎和轮胎井（前/后 - 左/右）
+let 轮辋           = Rotate([1,0,0],-90, Translate(
+                        [前悬长,
+                                   -(轮胎半径-轮胎压缩),
+                                  -(轮胎宽度 - 轮胎凸出量)]
+                                  , Cylinder(轮胎半径-轮辋高度,轮胎宽度,true)))
+let 轮胎          = Rotate([1,0,0],-90, Translate( [前悬长,
+                                   -(轮胎半径-轮胎压缩),
+                                  (0.5*轮胎凸出量)],
+                                  Cylinder(轮胎半径,轮胎宽度,true)));
+let 左前轮       = Difference(轮胎,[轮辋]);
+let 左前轮井    = Offset(轮胎,0.8,0.01,true)
+let 右前轮       = Translate([轴距,0,0], 左前轮, true)
+let 右前轮井    = Translate([轴距,0,0], 左前轮井, true)
+let 左后轮       = Rotate([0,0,1],180,Translate([-(2*前悬长),-车身宽度 ,0], 左前轮, true))
+let 左后轮井    = Translate([0,车身宽度-1,0], 左前轮井, true)
+let 右后轮       = Translate([轴距,0,0], 左后轮, true)
+let 右后轮井    = Translate([轴距,0,0], 左后轮井, true)
+
+// 从车身中减去轮胎井
+Difference(车身圆角,[左前轮井,
+                        左后轮井,
+                        右前轮井,
+                        右后轮井])
+
+
+let text = Translate([-20,-0,10],Text3D("mi", 5, 0.2,'Roboto'),false)
+ Rotate([0,0,1],-90,text)`;
 
 function initialize(projectContent = null) {
     this.searchParams = new URLSearchParams(window.location.search || window.location.hash.substr(1))
